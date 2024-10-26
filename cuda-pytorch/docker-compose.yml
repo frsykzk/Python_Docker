@@ -1,0 +1,18 @@
+services:
+  sample:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: sample/torch
+    volumes:
+      - ./work:/root/work
+    command: jupyter-lab
+    shm_size: '16gb'
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
